@@ -39,4 +39,4 @@ const useFetch = <T,>({ url, method = 'GET', initialData = null }: UseFetchProps
   return { data, error, isLoading };
 };
 
-export default useFetch
+export default useFetch;

@@ -3,37 +3,37 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-  text-align: center;
+	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 400;
+	text-align: center;
 }
 
 *,
 ::after,
 ::before {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font: inherit;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font: inherit;
 }
 
 body {
-  min-height: 100vh;
+	min-height: 100vh;
 }
 
 img,
 picture,
 svg,
 video {
-  display: block;
-  max-width: 100%;
+	display: block;
+	max-width: 100%;
 }
 
 button,
 input,
 select,
 textarea {
-  font: inherit;
+	font: inherit;
 }
