@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios, { AxiosResponse, AxiosError } from 'axios';
 
 interface UseFetchProps<T> {
   url: string;
@@ -9,30 +8,26 @@ interface UseFetchProps<T> {
 
 interface UseFetchState<T> {
   data: T | null;
-  error: AxiosError | null | unknown;
+  error: Error | null;
   isLoading: boolean;
 }
 
-const useFetch = <T,>({
-  url,
-  method = 'GET',
-  initialData = null,
-}: UseFetchProps<T>): UseFetchState<T> => {
+const useFetch = <T,>({ url, method = 'GET', initialData = null }: UseFetchProps<T>): UseFetchState<T> => {
   const [data, setData] = useState<T | null>(initialData as T | null);
-  const [error, setError] = useState<AxiosError | null | unknown>(null);
+  const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response: AxiosResponse<T> = await axios({
-          method,
-          url,
-        });
-
-        setData(response.data);
-      } catch (error) {
-        setError(error);
+        const response = await fetch(url, { method });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const responseData: T = await response.json();
+        setData(responseData);
+      } catch (err) {
+        setError(err as Error);
       } finally {
         setIsLoading(false);
       }
@@ -44,4 +39,4 @@ const useFetch = <T,>({
   return { data, error, isLoading };
 };
 
-export default useFetch;
+export default useFetch
